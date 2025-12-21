@@ -26,4 +26,16 @@ public class ItemService {
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
+
+    /**
+     * 영속성 컨텍스트가 자동 변경
+     */
+    @Transactional
+    public void updateItem(Long id, String name, int price, int stockQuantity) { //name,price,stockQuantity DTO로 만드는 추천
+        Item item = itemRepository.findOne(id);
+        item.setName(name);
+        item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
+        //여기도 setter 메서드가 아닌 메서드 따로 만들어서 관리 Best
+    }
 }
